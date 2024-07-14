@@ -1,0 +1,60 @@
+{
+  "anuncios": [
+    {
+      "nombre": "Bicicleta",
+      "venta": true,
+      "precio": 230.15,
+      "foto": "bici.png",
+      "tags": ["lifestyle", "motor"]
+    },
+    {
+      "nombre": "iPhone 3GS",
+      "venta": false,
+      "precio": 50.00,
+      "foto": "iPhone-3GS.png",
+      "tags": ["lifestyle", "mobile"]
+    },
+    {
+      "nombre": "Fiat Ducato 2006",
+      "venta": true,
+      "precio": 6900.00,
+      "foto": "fiat-Ducato-2006.png",
+      "tags": ["work", "motor"]
+    },
+    {
+      "nombre": "Nespresso Vertuo Pop",
+      "venta": false,
+      "precio": 60.50,
+      "foto": "vertuo-pop.png",
+      "tags": ["lifestyle"]
+    },
+    {
+      "nombre": "Xiaomi Electric Scooter 4",
+      "venta": true,
+      "precio": 349.95,
+      "foto": "xiaomi-scooter.png",
+      "tags": ["lifestyle", "motor"]
+    },
+    {
+      "nombre": "Bota S3 punta de acero",
+      "venta": false,
+      "precio": 25.00,
+      "foto": "bota-s3.png",
+      "tags": ["work"]
+    },
+    {
+      "nombre": "Nintendo 3DS",
+      "venta": true,
+      "precio": 70.0,
+      "foto": "nintendo-3ds.png",
+      "tags": ["lifestyle", "mobile"]
+    },
+    {
+      "nombre": "Casco Scorpion Exo-GT",
+      "venta": true,
+      "precio": 450.53,
+      "foto": "casco-scorpion.png",
+      "tags": ["lifestyle", "motor"]
+    }
+  ]
+}

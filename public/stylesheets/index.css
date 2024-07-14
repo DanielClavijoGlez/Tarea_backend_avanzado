@@ -1,0 +1,47 @@
+.anuncios-grid-container {
+  --_ideal-size: 350px;
+  --_max-column-count: 4;
+  --_column-gap: 2rem;
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(
+        max(
+          100% / var(--_max-column-count) - var(--_column-gap),
+          var(--_ideal-size)
+        ),
+        100%
+      ),
+      1fr
+    )
+  );
+  column-gap: var(--_column-gap);
+  row-gap: 2.5rem;
+}
+
+.anuncio-container {
+  list-style: none;
+  padding: 0;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.anuncio-container > li:nth-child(2) {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.anuncio-container > li:not(li.foto) {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.foto > img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  float: right;
+}

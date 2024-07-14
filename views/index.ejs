@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/index.css" />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <main class="anuncios-grid-container">
+      <% anuncios.forEach(anuncio => { %>
+      <ul class="anuncio-container">
+        <li class="foto">
+          <img src="..<%= anuncio.foto %>" alt="imagen-no-disponible" />
+        </li>
+        <li class="name"><%= anuncio.nombre %></li>
+        <li class="venta">Se vende: <%= anuncio.venta %></li>
+        <li class="precio"><%= anuncio.precio %> €</li>
+        <li class="tags">Tags: <%= anuncio.tags %></li>
+      </ul>
+      <% }); %>
+    </main>
+  </body>
+</html>
