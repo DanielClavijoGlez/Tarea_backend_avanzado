@@ -22,7 +22,18 @@ npm run dev
 
 All calls to the API use the path /apiv1
 
+### POST /authenticate
+
+For login. It returns a json-web-token you must save for all calls to the 'Anuncios' API
+
+Initial user in the database:
+
+* email: user@example.com
+* password: 1234
+
 ### GET /anuncios
+
+All calls to this API receive a jwt
 
 ```json
 {
@@ -74,6 +85,7 @@ The params come in the request's body. For example:
 |nombre|superman3000|
 |precio|50.53|
 |venta|false|
+|token|-----|
 
 Gets the following result:
 
@@ -92,3 +104,5 @@ Gets the following result:
     }
 }
 ```
+
+You can also upload an image when creating the 'anuncio' but the data must come in multipart/form-data format instead of xxx-urlencoded as it usually does. Remember in this case to put the jwt in the 'Authorization' header of the request, otherwise it'll give you a 401 error.
