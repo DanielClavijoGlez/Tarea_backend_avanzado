@@ -8,12 +8,12 @@ const usuarioSchema = mongoose.Schema({
   password: String,
 });
 
-usuarioSchema.statics.hashPassword = async function (password) {
-  return await bcrypt.hash(password, 10);
+usuarioSchema.statics.hashPassword = function (password) {
+  return bcrypt.hash(password, 10);
 };
 
-usuarioSchema.methods.comparePasswords = async function (password) {
-  return this.password === await bcrypt.hash(password, 10);
+usuarioSchema.methods.comparePasswords = function (password) {
+  return bcrypt.compare(password, this.password);
 }
 
 const Usuario = mongoose.model("Usuario", usuarioSchema);

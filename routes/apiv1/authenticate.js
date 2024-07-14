@@ -18,10 +18,12 @@ router.post(
 
     const user = await Usuario.findOne({ email: req.body.email });
 
-    if (!user || !user.comparePasswords(user.password)) {
-      res.json({ ok: false, error: "There is no user with these credentials" });
-      return;
-    }
+    if (!user) 
+      return res.json({ ok: false, status: 404, error: "There is no user with this email" });
+
+    if (!await user.comparePasswords(req.body.password)) 
+      return res.json({ ok: false, status: 401, error: "Invalid credentials" });
+    
 
     jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
       expiresIn: "1d",
