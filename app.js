@@ -26,6 +26,7 @@ app.use(helmet());
 app.use('/', require("./routes/index"));
 
 // API v1 routes
+app.use('/apiv1/authenticate', require("./routes/apiv1/authenticate"));
 app.use('/apiv1/anuncios', require("./routes/apiv1/anuncios"));
 
 // catch 404 and forward to error handler
