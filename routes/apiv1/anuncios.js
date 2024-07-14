@@ -4,6 +4,7 @@ const router = require("express").Router();
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const { getFiltersByRequest } = require("../../lib/anunciosUtils");
+const upload = require("../../lib/publicUploadConfig");
 
 const mongoose = require("mongoose");
 const Anuncio = mongoose.model("Anuncio");
@@ -32,7 +33,7 @@ router.get("/tags", (req, res) => {
   res.json({ availableTags: tags });
 });
 
-router.post("/", [
+router.post("/", upload.single("image"), [
   body('nombre').isAlphanumeric().withMessage("'nombre' must be a string"),
   body('venta').isBoolean().withMessage("'venta' must be a boolean value"),
   body('precio').isNumeric().withMessage("'precio' must be either an integer or a float number"),
@@ -51,7 +52,7 @@ router.post("/", [
 
   validationResult(req).throw();
 
-  const newAnuncio = await Anuncio.saveNewAnuncio(req.body);
+  const newAnuncio = await Anuncio.saveNewAnuncio(req);
 
   res.json({newAnuncio: newAnuncio});
 }));
