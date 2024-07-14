@@ -32,7 +32,7 @@ anuncioSchema.statics.getAnunciosForBrowser = async function(filters, skip, limi
   const anuncios = await query.exec();
 
   anuncios.forEach((anuncio) => {
-    anuncio.foto = '/images/anuncios/' + anuncio.foto;
+    anuncio.foto = process.env.ANUNCIO_IMG_URL_BASE_PATH + anuncio.foto;
   });
 
   return anuncios;

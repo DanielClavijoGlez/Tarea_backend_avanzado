@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var helmet = require("helmet");
+require("dotenv").config();
 
 require('./lib/connectMongoose');
 require('./models/Anuncio');
