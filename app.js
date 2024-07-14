@@ -6,6 +6,7 @@ var logger = require('morgan');
 var helmet = require("helmet");
 require("dotenv").config();
 const jwtMiddleware = require('./lib/jwtMiddleware');
+const I18n = require('./lib/i18nConfig');
 
 require('./lib/connectMongoose');
 require('./models/Anuncio');
@@ -22,6 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet());
+
+app.use(I18n.init);
 
 // Website routes
 app.use('/', require("./routes/index"));

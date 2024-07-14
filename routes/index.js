@@ -17,7 +17,7 @@ router.get('/', asyncHandler(async function(req, res, next) {
 
   const anuncios = await Anuncio.getAnunciosForBrowser(filters, skip, limit, sort);
 
-  res.render('index', { title: 'Fundamentos Backend', anuncios: anuncios });
+  res.render('index', { anuncios: anuncios });
 }));
 
 module.exports = router;
