@@ -1,6 +1,11 @@
 "use strict";
 
+const { Requester } = require("cote");
 const mongoose = require("mongoose");
+
+const fsPromises = require("fs").promises;
+
+const requester = new Requester({ name: "Anuncio-requester" });
 
 const anuncioSchema = mongoose.Schema({
   nombre: { type: String, index: true },
@@ -54,10 +59,21 @@ anuncioSchema.statics.getAvailableTags = () => {
 
 anuncioSchema.statics.saveNewAnuncio = async (anuncioData) => {
   const anuncio = new Anuncio(anuncioData.body);
-  if (anuncioData.file) anuncio.foto = anuncioData.file.filename;
   const newAnuncio = await anuncio.save();
 
+  if (anuncioData.file) anuncio.foto = anuncioData.file.filename;
+
   return newAnuncio;
+};
+
+anuncioSchema.statics.createThumbnail = async function (image) {
+  requester.send(
+    {
+      type: "create-thumbnail",
+      image: image,
+    },
+    (result) => {}
+  );
 };
 
 const Anuncio = mongoose.model("Anuncio", anuncioSchema);

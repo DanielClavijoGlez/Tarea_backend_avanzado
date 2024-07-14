@@ -106,3 +106,7 @@ Gets the following result:
 ```
 
 You can also upload an image when creating the 'anuncio' but the data must come in multipart/form-data format instead of xxx-urlencoded as it usually does. Remember in this case to put the jwt in the 'Authorization' header of the request, otherwise it'll give you a 401 error.
+
+## Microservices
+
+Run the thumbnail creator with node in its own terminal

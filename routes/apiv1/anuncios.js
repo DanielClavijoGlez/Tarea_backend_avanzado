@@ -33,28 +33,40 @@ router.get("/tags", (req, res) => {
   res.json({ availableTags: tags });
 });
 
-router.post("/", upload.single("image"), [
-  body('nombre').isAlphanumeric().withMessage("'nombre' must be a string"),
-  body('venta').isBoolean().withMessage("'venta' must be a boolean value"),
-  body('precio').isNumeric().withMessage("'precio' must be either an integer or a float number"),
-  body('tags').custom(value => {
-    let result = true;
-    if (Array.isArray(value)) {
-      value.forEach(val => {
-        if (!Anuncio.getAvailableTags().includes(val)) result = false;
+router.post(
+  "/",
+  upload.single("image"),
+  [
+    body("nombre").isAlphanumeric().withMessage("'nombre' must be a string"),
+    body("venta").isBoolean().withMessage("'venta' must be a boolean value"),
+    body("precio")
+      .isNumeric()
+      .withMessage("'precio' must be either an integer or a float number"),
+    body("tags")
+      .custom((value) => {
+        let result = true;
+        if (Array.isArray(value)) {
+          value.forEach((val) => {
+            if (!Anuncio.getAvailableTags().includes(val)) result = false;
+          });
+        } else {
+          if (!Anuncio.getAvailableTags().includes(value)) result = false;
+        }
+        return result;
       })
-    } else {
-      if (!Anuncio.getAvailableTags().includes(value)) result = false;
-    }
-    return result;
-  }).withMessage(`'tag' must be one or more of the following: ${Anuncio.getAvailableTags()}`)
-], asyncHandler(async (req, res) => {
+      .withMessage(
+        `'tag' must be one or more of the following: ${Anuncio.getAvailableTags()}`
+      ),
+  ],
+  asyncHandler(async (req, res) => {
+    validationResult(req).throw();
 
-  validationResult(req).throw();
+    const newAnuncio = await Anuncio.saveNewAnuncio(req);
 
-  const newAnuncio = await Anuncio.saveNewAnuncio(req);
+    if (newAnuncio.foto) Anuncio.createThumbnail(newAnuncio.foto);
 
-  res.json({newAnuncio: newAnuncio});
-}));
+    res.json({ newAnuncio: newAnuncio });
+  })
+);
 
 module.exports = router;
